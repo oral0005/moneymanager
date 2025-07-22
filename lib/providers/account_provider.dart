@@ -11,4 +11,14 @@ class AccountProvider with ChangeNotifier {
     _accounts = await DatabaseHelper.instance.getAccounts();
     notifyListeners();
   }
+
+  Future<void> addAccount(Account account) async {
+    await DatabaseHelper.instance.insertAccount(account);
+    await fetchAccounts();
+  }
+
+  Future<void> deleteAccount(int id) async {
+    await DatabaseHelper.instance.deleteAccount(id);
+    await fetchAccounts();
+  }
 }

@@ -106,4 +106,14 @@ class DatabaseHelper {
       await db.update('accounts', {'balance': newBalance}, where: 'id = ?', whereArgs: [transaction.accountId]);
     }
   }
+
+  Future<void> insertAccount(Account account) async {
+  final db = await database;
+  await db.insert('accounts', account.toMap());
+}
+
+Future<void> deleteAccount(int id) async {
+  final db = await database;
+  await db.delete('accounts', where: 'id = ?', whereArgs: [id]);
+}
 }
